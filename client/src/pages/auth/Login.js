@@ -3,21 +3,21 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Login() {
   // state
   const [email, setEmail] = useState("cyber.hongky@gmail.com");
   const [password, setPassword] = useState("12345678");
-
   // hook
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(`${process.env.REACT_APP_API}/login`, {
+      const { data } = await axios.post(`/login`, {
         email,
         password,
       });
@@ -28,7 +28,10 @@ export default function Login() {
         localStorage.setItem("auth", JSON.stringify(data));
         setAuth({ ...auth, token: data.token, user: data.user });
         toast.success("Đăng nhập thành công!");
-        navigate("/dashboard");
+        navigate(
+          location.state ||
+            `/dashboard/${data?.user?.role === 1 ? "admin" : "user"}`
+        );
       }
     } catch (err) {
       console.log(err);
@@ -61,7 +64,7 @@ export default function Login() {
               />
 
               <button className="btn btn-primary" type="submit">
-                Submit
+                Đăng nhập
               </button>
             </form>
           </div>
