@@ -2,7 +2,7 @@ import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import UserMenu from "../../components/nav/UserMenu";
 
-export default function Dashboard() {
+export default function UserOrders() {
   // context
   const [auth, setAuth] = useAuth();
 
@@ -16,12 +16,8 @@ export default function Dashboard() {
             <UserMenu />
           </div>
           <div className="col-md-9">
-            <div className="p-3 mt-2 mb-2 h4 bg-light">Quý khách hàng</div>
-
-            <ul className="list-group">
-              <li className="list-group-item">{auth?.user?.name}</li>
-              <li className="list-group-item">{auth?.user?.email}</li>
-            </ul>
+            <div className="p-3 mt-2 mb-2 h4 bg-light">Thông tin đơn hàng</div>
+            user order history...
           </div>
         </div>
       </div>
