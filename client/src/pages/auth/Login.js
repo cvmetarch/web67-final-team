@@ -2,11 +2,17 @@ import { useState } from "react";
 import Jumbotron from "../../components/cards/Jumbotron";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useAuth } from "../../context/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   // state
   const [email, setEmail] = useState("cyber.hongky@gmail.com");
   const [password, setPassword] = useState("12345678");
+
+  // hook
+  const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,17 +25,21 @@ export default function Login() {
       if (data?.error) {
         toast.error(data.error);
       } else {
-        toast.success("Login successful");
+        localStorage.setItem("auth", JSON.stringify(data));
+        setAuth({ ...auth, token: data.token, user: data.user });
+        toast.success("Đăng nhập thành công!");
+        navigate("/dashboard");
       }
     } catch (err) {
       console.log(err);
-      toast.error("Login failed. Try again.");
+      toast.error("Đăng nhập chưa thành công! Hãy thử lại.");
     }
   };
 
   return (
     <div>
       <Jumbotron title="Đăng nhập" />
+
       <div className="container mt-5">
         <div className="row">
           <div className="col-md-6 offset-md-3">

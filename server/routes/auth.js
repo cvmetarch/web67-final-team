@@ -11,6 +11,10 @@ import { register, login, secret } from "../controllers/auth.js";
 // router.get("/users", users);
 router.post("/register", register);
 router.post("/login", login);
+router.get("/auth-check", requireSignin, (req, res) => {
+    res.json({ ok: true });
+  });
+
 // testing
 router.get("/secret", requireSignin, isAdmin, secret);
 
