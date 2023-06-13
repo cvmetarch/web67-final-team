@@ -5,11 +5,11 @@ export const create = async (req, res) => {
     try {
         const { name } = req.body;
         if (!name.trim()) {
-            return res.json({ error: "Name is required!" });
+            return res.json({ error: "Vui lòng nhập tên danh mục!" });
         }
         const existingCategory = await Category.findOne({ name });
         if (existingCategory) {
-            return res.json({ error: "Category already exists!" });
+            return res.json({ error: "Danh mục đã tồn tại!" });
         }
 
         const category = await new Category({ name, slug: slugify(name) }).save();

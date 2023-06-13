@@ -8,7 +8,7 @@ export default function AdminMenu() {
       <ul className="list-group list-unstyled">
         <li>
           <NavLink className="list-group-item" to="/dashboard/admin/category">
-            Thêm danh mục
+            Quản lý danh mục
           </NavLink>
         </li>
 
