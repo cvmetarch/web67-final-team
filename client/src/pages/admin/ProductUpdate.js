@@ -5,11 +5,11 @@ import AdminMenu from "../../components/nav/AdminMenu";
 import axios from "axios";
 import { Select } from "antd";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const { Option } = Select;
 
-export default function AdminProduct() {
+export default function AdminProductUpdate() {
   // context
   const [auth, setAuth] = useAuth();
   // state
@@ -21,8 +21,14 @@ export default function AdminProduct() {
   const [category, setCategory] = useState("");
   const [shipping, setShipping] = useState("");
   const [quantity, setQuantity] = useState("");
+  const [id, setId] = useState("");
   // hook
   const navigate = useNavigate();
+  const params = useParams();
+
+  useEffect(() => {
+    loadProduct();
+  }, []);
 
   useEffect(() => {
     loadCategories();
@@ -37,11 +43,26 @@ export default function AdminProduct() {
     }
   };
 
+  const loadProduct = async () => {
+    try {
+      const { data } = await axios.get(`/product/${params.slug}`);
+      setName(data.name);
+      setDescription(data.description);
+      setPrice(data.price);
+      setCategory(data.category._id);
+      setShipping(data.shipping);
+      setQuantity(data.quantity);
+      setId(data._id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const productData = new FormData();
-      productData.append("photo", photo);
+      photo && productData.append("photo", photo);
       productData.append("name", name);
       productData.append("description", description);
       productData.append("price", price);
@@ -49,16 +70,31 @@ export default function AdminProduct() {
       productData.append("shipping", shipping);
       productData.append("quantity", quantity);
 
-      const { data } = await axios.post("/product", productData);
+      const { data } = await axios.put(`/product/${id}`, productData);
       if (data?.error) {
         toast.error(data.error);
       } else {
-        toast.success(`"${data.name}" đã được thêm vào`);
+        toast.success(`"${data.name}" đã được cập nhật`);
         navigate("/dashboard/admin/products");
       }
     } catch (err) {
       console.log(err);
-      toast.error("Thêm sản phẩm chưa thành công. Hãy thử lại!");
+      toast.error("Cập nhật sản phẩm chưa thành công. Hãy thử lại!");
+    }
+  };
+
+  const handleDelete = async (req, res) => {
+    try {
+      let answer = window.confirm(
+        "Xác nhận muốn xoá sản phẩm này?"
+      );
+      if (!answer) return;
+      const { data } = await axios.delete(`/product/${id}`);
+      toast.success(`"${data.name}" đã được xoá thành công!`);
+      navigate("/dashboard/admin/products");
+    } catch (err) {
+      console.log(err);
+      toast.error("Xoá chưa thành công. Hãy thử lại!");
     }
   };
 
@@ -66,7 +102,7 @@ export default function AdminProduct() {
     <>
       <Jumbotron
         title={`Hello ${auth?.user?.name}`}
-        subTitle="Admin Dashboard"
+        subTitle="Trang quản trị"
       />
 
       <div className="container-fluid">
@@ -75,12 +111,23 @@ export default function AdminProduct() {
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <div className="p-3 mt-2 mb-2 h4 bg-light">Thêm sản phẩm</div>
+            <div className="p-3 mt-2 mb-2 h4 bg-light">Cập nhật sản phẩm</div>
 
-            {photo && (
+            {photo ? (
               <div className="text-center">
                 <img
                   src={URL.createObjectURL(photo)}
+                  alt="product photo"
+                  className="img img-responsive"
+                  height="200px"
+                />
+              </div>
+            ) : (
+              <div className="text-center">
+                <img
+                  src={`${
+                    process.env.REACT_APP_API
+                  }/product/photo/${id}?${new Date().getTime()}`}
                   alt="product photo"
                   className="img img-responsive"
                   height="200px"
@@ -132,6 +179,7 @@ export default function AdminProduct() {
               className="form-select mb-3"
               placeholder="Danh mục"
               onChange={(value) => setCategory(value)}
+              value={category}
             >
               {categories?.map((c) => (
                 <Option key={c._id} value={c._id}>
@@ -146,6 +194,7 @@ export default function AdminProduct() {
               className="form-select mb-3"
               placeholder="Giao hàng"
               onChange={(value) => setShipping(value)}
+              value={shipping ? "Có" : "Không"}
             >
               <Option value="0">Không</Option>
               <Option value="1">Có</Option>
@@ -160,9 +209,14 @@ export default function AdminProduct() {
               onChange={(e) => setQuantity(e.target.value)}
             />
 
-            <button onClick={handleSubmit} className="btn btn-primary mb-5">
-              Submit
-            </button>
+             <div className="d-flex justify-content-between">
+              <button onClick={handleSubmit} className="btn btn-primary mb-5">
+                Cập nhật
+              </button>
+              <button onClick={handleDelete} className="btn btn-danger mb-5">
+                Xoá
+              </button>
+            </div>
           </div>
         </div>
       </div>

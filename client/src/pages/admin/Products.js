@@ -29,7 +29,7 @@ export default function AdminProducts() {
     <>
       <Jumbotron
         title={`Hello ${auth?.user?.name}`}
-        subTitle="Admin Dashboard"
+        subTitle="Trang quản trị"
       />
 
       <div className="container-fluid">
@@ -38,7 +38,7 @@ export default function AdminProducts() {
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <div className="p-3 mt-2 mb-2 h4 bg-light">Products</div>
+            <div className="p-3 mt-2 mb-2 h4 bg-light">Danh sách sản phẩm</div>
 
             {products?.map((p) => (
               <Link
@@ -62,7 +62,7 @@ export default function AdminProducts() {
                         <p className="card-text">
                           <small className="text-muted">
                             {moment(p.createdAt).format(
-                              "MMMM Do YYYY, h:mm:ss a"
+                              "DD/MM/YYYY, HH:mm"
                             )}
                           </small>
                         </p>
