@@ -1,6 +1,7 @@
 .active {
   text-decoration: underline !important;
-  text-decoration-thickness: 5px !important;
+  text-decoration-thickness: 3px !important;
+  text-underline-offset: 5px;
 }
 
 .pointer {
@@ -73,4 +74,8 @@
   100% {
     background-position: 0% 50%;
   }
+}
+
+.dropdown:hover .dropdown-menu{
+  display:block;
 }

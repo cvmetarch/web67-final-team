@@ -122,7 +122,7 @@ export default function ProductView() {
               }}
               onClick={() => {
                 setCart([...cart, product]);
-                toast.success("Added to cart");
+                toast.success("Đã thêm vào giỏ hàng!");
               }}
             >
               Thêm vào giỏ hàng

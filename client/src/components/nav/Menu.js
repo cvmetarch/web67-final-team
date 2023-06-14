@@ -6,6 +6,7 @@ import useCategory from "../../hooks/useCategory";
 import { useCart } from "../../context/cart";
 import { Badge } from "antd";
 import { FaShoppingBag, FaShoppingBasket, FaShoppingCart } from "react-icons/fa";
+import storeLogo from "../../images/logo.png";
 
 export default function Menu() {
   // context
@@ -25,19 +26,16 @@ export default function Menu() {
 
   return (
     <>
-      <ul className="nav d-flex justify-content-between shadow-sm mb-2">
+      <ul className="nav d-flex justify-content-between align-items-center shadow-sm mb-2">
         <li className="nav-item">
           <NavLink className="nav-link" aria-current="page" to="/">
-            Trang chủ
+            <img
+              src={storeLogo}
+              className="card-img-top"
+              style={{ width: "150px", objectFit: "cover" }}
+            />
           </NavLink>
         </li>
-
-        <li className="nav-item">
-          <NavLink className="nav-link" aria-current="page" to="/shop">
-            Sản phẩm
-          </NavLink>
-        </li>
-
         <div className="dropdown">
           <li>
             <a
@@ -68,6 +66,14 @@ export default function Menu() {
           </li>
         </div>
 
+        <li className="nav-item d-flex">
+          <NavLink className="nav-link" aria-current="page" to="/shop">
+            CyberSilver Mall
+          </NavLink>
+        </li>
+
+        <Search />
+
         <li className="nav-item mt-1">
           <Badge
             count={cart?.length >= 1 ? cart.length : 0}
@@ -80,21 +86,19 @@ export default function Menu() {
           </Badge>
         </li>
 
-        <Search />
-
         {!auth?.user ? (
-        <>
-          <li className="nav-item">
+        <div className="dropdown">
+          <li>
             <NavLink className="nav-link" to="/login">
               Đăng nhập
             </NavLink>
+            <ul className="dropdown-menu">
+              <NavLink className="nav-link" to="/register">
+                Đăng ký
+              </NavLink>
+            </ul>
           </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/register">
-              Đăng ký
-            </NavLink>
-          </li>
-        </>
+        </div>
         ):(
           <div className="dropdown">
             <li>

@@ -58,7 +58,7 @@ return (
           onClick={() => {
             setCart([...cart, p]);
             localStorage.setItem("cart", JSON.stringify([...cart, p]));
-            toast.success("Added to cart");
+            toast.success("Đã thêm vào giỏ hàng!");
           }}
         >
           Thêm vào giỏ hàng
