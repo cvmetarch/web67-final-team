@@ -4,8 +4,10 @@ import slugify from "slugify";
 import braintree from "braintree";
 import dotenv from "dotenv";
 import Order from "../models/order.js";
+// import sgMail from "@sendgrid/mail";
 
 dotenv.config();
+// sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 const gateway = new braintree.BraintreeGateway({
   environment: braintree.Environment.Sandbox,
@@ -267,17 +269,85 @@ export const processPayment = async (req, res) => {
       },
       function (error, result) {
         if (result) {
+          // res.send(result);
+          // create order
           const order = new Order({
             products: cart,
             payment: result,
             buyer: req.user._id,
           }).save();
+          // decrement quantity
+          decrementQuantity(cart);
+          // const bulkOps = cart.map((item) => {
+          //   return {
+          //     updateOne: {
+          //       filter: { _id: item._id },
+          //       update: { $inc: { quantity: -0, sold: +1 } },
+          //     },
+          //   };
+          // });
+
+          // Product.bulkWrite(bulkOps, {});
+
           res.json({ ok: true });
         } else {
           res.status(500).send(error);
         }
       }
     );
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const decrementQuantity = async (cart) => {
+  try {
+    // build mongodb query
+    const bulkOps = cart.map((item) => {
+      return {
+        updateOne: {
+          filter: { _id: item._id },
+          update: { $inc: { quantity: -0, sold: +1 } },
+        },
+      };
+    });
+
+    const updated = await Product.bulkWrite(bulkOps, {});
+    console.log("blk updated", updated);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const orderStatus = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { status } = req.body;
+    const order = await Order.findByIdAndUpdate(
+      orderId,
+      { status },
+      { new: true }
+    ).populate("buyer", "email name");
+    // send email
+
+    // prepare email
+    const emailData = {
+      from: process.env.EMAIL_FROM,
+      to: order.buyer.email,
+      subject: "Order status",
+      html: `
+        <h1>Hi ${order.buyer.name}, Your order's status is: <span style="color:red;">${order.status}</span></h1>
+        <p>Visit <a href="${process.env.CLIENT_URL}/dashboard/user/orders">your dashboard</a> for more details</p>
+      `,
+    };
+
+    try {
+      await sgMail.send(emailData);
+    } catch (err) {
+      console.log(err);
+    }
+
+    res.json(order);
   } catch (err) {
     console.log(err);
   }

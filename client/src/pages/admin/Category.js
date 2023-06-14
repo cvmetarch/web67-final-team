@@ -88,7 +88,7 @@ export default function AdminCategory() {
   return (
     <>
       <Jumbotron
-        title={`Hello ${auth?.user?.name}`}
+        title={`Xin chào ${auth?.user?.name}`}
         subTitle="Trang quản trị"
       />
 

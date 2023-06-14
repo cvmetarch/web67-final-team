@@ -89,18 +89,23 @@ export default function Menu() {
         {!auth?.user ? (
         <div className="dropdown">
           <li>
-            <NavLink className="nav-link" to="/login">
-              Đăng nhập
-            </NavLink>
-            <ul className="dropdown-menu">
-              <NavLink className="nav-link" to="/register">
-                Đăng ký
+              <NavLink
+                className="nav-link"
+                to="/login"
+              >
+                Đăng nhập
               </NavLink>
-            </ul>
+              <ul className="dropdown-menu">
+                <li>
+                  <NavLink className="nav-link" to="/register">
+                    Đăng ký
+                  </NavLink>
+                </li>
+              </ul>
           </li>
         </div>
         ):(
-          <div className="dropdown">
+          <div className="dropdown" style={{paddingRight:"0.5em",minWidth:"10em",textAlign:"right"}}>
             <li>
               <a
                 className="nav-link pointer dropdown-toggle"
@@ -109,7 +114,7 @@ export default function Menu() {
                 {auth?.user?.name}
               </a>
 
-              <ul className="dropdown-menu">
+              <ul className="dropdown-menu" style={{paddingRight:"0.5em", textAlign:"right"}}>
                 <li>
                   <NavLink
                     className="nav-link"
