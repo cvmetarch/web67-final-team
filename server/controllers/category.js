@@ -1,4 +1,5 @@
 import Category from "../models/category.js";
+import Product from "../models/product.js";
 import slugify from "slugify";
 
 export const create = async (req, res) => {
@@ -22,49 +23,63 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        const { name } = req.body;
-        const {categoryId } = req.params;
-        const category = await Category.findByIdAndUpdate(
-            categoryId,
-            {
-                name,
-                slug: slugify(name),
-            },
-            { new: true }
-        );
-        res.json(category);
+      const { name } = req.body;
+      const { categoryId } = req.params;
+      const category = await Category.findByIdAndUpdate(
+        categoryId,
+        {
+          name,
+          slug: slugify(name),
+        },
+        { new: true }
+      );
+      res.json(category);
     } catch (err) {
-        console.log(err);
-        return res.status(400).json(err.message);
+      console.log(err);
+      return res.status(400).json(err.message);
     }
-};
+  };
 
-export const remove = async (req, res) => {
+  export const remove = async (req, res) => {
     try {
-        const removed = await Category.findByIdAndDelete(req.params.categoryId);
-        res.json(removed);
+      const removed = await Category.findByIdAndDelete(req.params.categoryId);
+      res.json(removed);
     } catch (err) {
-        console.log(err);
-        return res.status(400).json(err.message);
+      console.log(err);
+      return res.status(400).json(err.message);
     }
-};
+  };
 
-export const list = async (req, res) => {
+  export const list = async (req, res) => {
     try {
-        const all = await Category.find({});
-        res.json(all);
+      const all = await Category.find({});
+      res.json(all);
     } catch (err) {
-        console.log(err);
-        return res.status(400).json(err.message);
+      console.log(err);
+      return res.status(400).json(err.message);
     }
-};
+  };
 
-export const read = async (req, res) => {
+  export const read = async (req, res) => {
     try {
-        const category = await Category.findOne({ slug: req.params.slug });
-        res.json(category);
+      const category = await Category.findOne({ slug: req.params.slug });
+      res.json(category);
     } catch (err) {
-        console.log(err);
-        return res.status(400).json(err.message);
+      console.log(err);
+      return res.status(400).json(err.message);
     }
-};
+  };
+
+  export const productsByCategory = async (req, res) => {
+    try {
+      const category = await Category.findOne({ slug: req.params.slug });
+      const products = await Product.find({ category }).populate("category");
+
+      res.json({
+        category,
+        products,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };

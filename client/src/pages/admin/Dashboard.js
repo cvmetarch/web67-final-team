@@ -18,12 +18,12 @@ export default function AdminDashboard() {
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <div className="p-3 mt-2 mb-2 h4 bg-light">Quản trị viên</div>
+            <div className="p-3 mt-2 mb-2 h4 bg-light">Thông tin quản trị viên</div>
 
             <ul className="list-group">
               <li className="list-group-item">{auth?.user?.name}</li>
               <li className="list-group-item">{auth?.user?.email}</li>
-              <li className="list-group-item">Admin</li>
+              <li className="list-group-item" style={{color:"red"}}>Admin</li>
             </ul>
           </div>
         </div>
