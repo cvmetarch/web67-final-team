@@ -50,7 +50,7 @@ export default function Login() {
               <input
                 type="email"
                 className="form-control mb-4 p-2"
-                placeholder="Enter your email"
+                placeholder="Địa chỉ email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -58,7 +58,7 @@ export default function Login() {
               <input
                 type="password"
                 className="form-control mb-4 p-2"
-                placeholder="Enter your password"
+                placeholder="Mật khẩu"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />

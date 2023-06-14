@@ -28,8 +28,8 @@ app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
 
-const port = process.env.PORT|| 8000;
+const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
-    console.log(`Node server listening on port ${port}`);
+  console.log(`Node server is running on port ${port}`);
 });

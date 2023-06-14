@@ -8,7 +8,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <Jumbotron title={`Hello ${auth?.user?.name}`} subTitle="Dashboard" />
+      <Jumbotron title={`Hello ${auth?.user?.name}`} subTitle="Trang cá nhân" />
 
       <div className="container-fluid">
         <div className="row">
@@ -16,7 +16,7 @@ export default function Dashboard() {
             <UserMenu />
           </div>
           <div className="col-md-9">
-            <div className="p-3 mt-2 mb-2 h4 bg-light">Quý khách hàng</div>
+            <div className="p-3 mt-2 mb-2 h4 bg-light">Thông tin Quý khách</div>
 
             <ul className="list-group">
               <li className="list-group-item">{auth?.user?.name}</li>

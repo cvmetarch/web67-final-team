@@ -8,7 +8,7 @@ export default function UserOrders() {
 
   return (
     <>
-      <Jumbotron title={`Hello ${auth?.user?.name}`} subTitle="Dashboard" />
+      <Jumbotron title={`Hello ${auth?.user?.name}`} subTitle="Trang cá nhân" />
 
       <div className="container-fluid">
         <div className="row">
