@@ -5,6 +5,7 @@ import Search from "../forms/Search";
 import useCategory from "../../hooks/useCategory";
 import { useCart } from "../../context/cart";
 import { Badge } from "antd";
+import { FaShoppingBag, FaShoppingBasket, FaShoppingCart } from "react-icons/fa";
 
 export default function Menu() {
   // context
@@ -74,7 +75,7 @@ export default function Menu() {
             showZero={true}
           >
             <NavLink className="nav-link" aria-current="page" to="/cart">
-              Giỏ hàng
+              <FaShoppingBag />
             </NavLink>
           </Badge>
         </li>

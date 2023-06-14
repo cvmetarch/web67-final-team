@@ -1,31 +1,34 @@
-// import moment from "moment";
 import { Badge } from "antd";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-// import viLocale from "moment/locale/vi";
+import { useCart } from "../../context/cart";
 
 export default function ProductCard({ p }) {
+  // context
+  const [cart, setCart] = useCart();
+  // hooks
   const navigate = useNavigate();
 
 return (
     <div className="card mb-3 hoverable">
-        <img className="card-img-top"
+      <Badge.Ribbon text={`Đã bán ${p?.sold}`} color="red">
+        <Badge.Ribbon
+          text={`${
+            p?.quantity >= 1
+              ? `${p?.quantity - p?.sold} sản phẩm có sẵn`
+              : "Hết hàng"
+          }`}
+          placement="start"
+          color="green"
+        >
+          <img
+            className="card-img-top"
             src={`${process.env.REACT_APP_API}/product/photo/${p._id}`}
             alt={p.name}
-            style={{ height: "300px", objectFit: "cover" }}/>
-        <div style={{ height: "24px"}}>
-            <Badge.Ribbon text={`Đã bán ${p?.sold}`} color="red">
-                <Badge.Ribbon
-                    text={`${
-                    p?.quantity >= 1
-                        ? `${p?.quantity - p?.sold} sản phẩm có sẵn`
-                        : "Hết hàng"
-                    }`}
-                    placement="start"
-                    color="green"
-                >
-                </Badge.Ribbon>
-            </Badge.Ribbon>
-        </div>
+            style={{ height: "300px", objectFit: "cover" }}
+          />
+        </Badge.Ribbon>
+      </Badge.Ribbon>
 
       <div className="card-body">
         <h5>{p?.name}</h5>
@@ -52,6 +55,11 @@ return (
         <button
           className="btn btn-outline-primary col card-button"
           style={{ borderBottomRightRadius: "5px" }}
+          onClick={() => {
+            setCart([...cart, p]);
+            localStorage.setItem("cart", JSON.stringify([...cart, p]));
+            toast.success("Added to cart");
+          }}
         >
           Thêm vào giỏ hàng
         </button>

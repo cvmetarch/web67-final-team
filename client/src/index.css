@@ -1,9 +1,6 @@
-@import '~antd/dist/antd.css'
-
 .active {
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
+  text-decoration: underline !important;
+  text-decoration-thickness: 5px !important;
 }
 
 .pointer {
@@ -67,7 +64,9 @@
 }
 
 @keyframes Gradient {
-  0% {background-position: 0% 50%;}
+  0% {
+    background-position: 0% 50%;
+  }
   50% {
     background-position: 100% 50%;
   }
