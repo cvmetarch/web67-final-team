@@ -4,6 +4,7 @@ import Jumbotron from "../components/cards/Jumbotron";
 import { useNavigate } from "react-router-dom";
 import UserCartSidebar from "../components/cards/UserCartSidebar";
 import ProductCardHorizontal from "../components/cards/ProductCardHorizontal";
+import Footer from "../components/footer/Footer";
 
 export default function Cart() {
   // context
@@ -13,7 +14,7 @@ export default function Cart() {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div style={{transform: "translateY(50px)"}}>
       <Jumbotron
         title={`Xin chào ${auth?.token && auth?.user?.name}`}
         subTitle={
@@ -60,6 +61,7 @@ export default function Cart() {
             {(cart.length!==0)?(<UserCartSidebar />):("")}
           </div>
         </div>
-    </>
+        <Footer />
+    </div>
   );
 }

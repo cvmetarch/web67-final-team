@@ -4,11 +4,12 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
 import { useNavigate, useLocation } from "react-router-dom";
+import Footer from "../../components/footer/Footer";
 
 export default function Login() {
   // state
-  const [email, setEmail] = useState("cyber.hongky@gmail.com");
-  const [password, setPassword] = useState("12345678");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   // hook
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
@@ -40,10 +41,11 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div style={{transform: "translateY(50px)"}}>
       <Jumbotron title="Đăng nhập" />
 
-      <div className="container mt-5">
+      <div className="container mt-5"
+      style={{marginBottom:"20px"}}>
         <div className="row">
           <div className="col-md-6 offset-md-3">
             <form onSubmit={handleSubmit}>
@@ -70,6 +72,7 @@ export default function Login() {
           </div>
         </div>
       </div>
+    <Footer />
     </div>
   );
 }

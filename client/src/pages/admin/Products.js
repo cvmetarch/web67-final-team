@@ -5,6 +5,7 @@ import AdminMenu from "../../components/nav/AdminMenu";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import Footer from "../../components/footer/Footer";
 
 export default function AdminProducts() {
   // context
@@ -26,14 +27,14 @@ export default function AdminProducts() {
   };
 
   return (
-    <>
+    <div style={{transform: "translateY(50px)"}}>
       <Jumbotron
         title={`Xin chào ${auth?.user?.name}`}
         subTitle="Trang quản trị"
       />
 
       <div className="container-fluid">
-        <div className="row">
+        <div className="row col-md-8 mx-auto">
           <div className="col-md-3">
             <AdminMenu />
           </div>
@@ -75,6 +76,7 @@ export default function AdminProducts() {
           </div>
         </div>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }

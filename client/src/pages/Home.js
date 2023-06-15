@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Jumbotron from "../components/cards/Jumbotron";
 import axios from "axios";
 import ProductCard from "../components/cards/ProductCard";
+import Carousel from "../components/carousel/Carousel";
+import Footer from "../components/footer/Footer";
 
 export default function Home() {
     const [products, setProducts] = useState([]);
@@ -53,11 +55,13 @@ export default function Home() {
     const sortedBySold = arr?.sort((a, b) => (a.sold < b.sold ? 1 : -1));
 
     return (
-        <div>
+        <div style={{transform: "translateY(50px)"}}>
             <Jumbotron title="CyberSilver Store - Bạc Thái & Vàng phong thủy" subTitle="Welcome to CyberSilver"/>
-            <div className="row">
-                <div className="col-md-6">
-                    <h2 className="p-3 mt-2 mb-2 h4 bg-light text-center">
+            <Carousel />
+            <div className="row col-md-8 mx-auto">
+              <div className="d-flex justify-content-between">
+                <div className="col-md-6 pe-4">
+                    <h2 className="p-3 mt-2 mb-2 h4 bg-warning bg-opacity-25 text-center">
                         Sản phẩm mới
                     </h2>
                     <div className="row">
@@ -69,8 +73,8 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className="col-md-6">
-                    <h2 className="p-3 mt-2 mb-2 h4 bg-light text-center">
+                <div className="col-md-6 ps-4">
+                <h2 className="p-3 mt-2 mb-2 h4 bg-warning bg-opacity-50 text-center">
                         Bán chạy
                     </h2>
                     <div className="row">
@@ -80,6 +84,7 @@ export default function Home() {
                             </div>
                         ))}
                     </div>
+                </div>
                 </div>
             </div>
 
@@ -97,6 +102,7 @@ export default function Home() {
                 </button>
                 )}
             </div>
+            <Footer />
 
         </div>
     );

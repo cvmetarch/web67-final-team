@@ -6,6 +6,7 @@ import axios from "axios";
 import { Select } from "antd";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../components/footer/Footer";
 
 const { Option } = Select;
 
@@ -63,14 +64,14 @@ export default function AdminProduct() {
   };
 
   return (
-    <>
+    <div style={{transform: "translateY(50px)"}}>
       <Jumbotron
         title={`Xin chào ${auth?.user?.name}`}
         subTitle="Trang quản trị"
       />
 
       <div className="container-fluid">
-        <div className="row">
+        <div className="row col-md-8 mx-auto">
           <div className="col-md-3">
             <AdminMenu />
           </div>
@@ -166,6 +167,7 @@ export default function AdminProduct() {
           </div>
         </div>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }

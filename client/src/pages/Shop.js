@@ -4,6 +4,7 @@ import axios from "axios";
 import ProductCard from "../components/cards/ProductCard";
 import { Checkbox, Radio } from "antd";
 import { prices } from "../prices";
+import Footer from "../components/footer/Footer";
 
 export default function Shop() {
   const [categories, setCategories] = useState([]);
@@ -66,13 +67,11 @@ export default function Shop() {
   };
 
   return (
-    <>
+    <div style={{transform: "translateY(50px)"}}>
       <Jumbotron title="CyberSilver Store - Bạc Thái & Vàng phong thủy" subTitle="Welcome to CyberSilver" />
 
-      {/* <pre>{JSON.stringify({ checked, radio }, null, 4)}</pre> */}
-
       <div className="container-fluid">
-        <div className="row">
+        <div className="row col-md-10 mx-auto my-3">
           <div className="col-md-3">
             <h2 className="p-3 mt-2 mb-2 h4 bg-light text-center">
              Lọc theo danh mục
@@ -128,6 +127,8 @@ export default function Shop() {
           </div>
         </div>
       </div>
-    </>
+
+      <Footer />
+    </div>
   );
 }

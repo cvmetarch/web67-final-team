@@ -79,3 +79,7 @@
 .dropdown:hover .dropdown-menu{
   display:block;
 }
+
+banner:hover {
+ cursor: pointer;
+}

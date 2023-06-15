@@ -4,14 +4,12 @@ export default function Jumbotron({
   }) {
     return (
       <div
-      className="container-fluid jumbotron"
-      style={{ marginTop: "-6px", height: "200px" }}
+      className="container-fluid jumbotron d-flex justify-content-center align-items-center text-center"
+      style={{ height: "200px" }}
     >
-        <div className="row" style={{height:"100%"}}>
-          <div className="col text-center p-5 m-auto">
-            <h1 className="fw-bold">{title}</h1>
-            <p className="lead">{subTitle}</p>
-          </div>
+        <div>
+          <h1 className="fw-bold">{title}</h1>
+          <p className="lead">{subTitle}</p>
         </div>
       </div>
     );

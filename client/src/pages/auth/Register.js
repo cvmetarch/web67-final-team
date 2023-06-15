@@ -4,12 +4,13 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../components/footer/Footer";
 
 export default function Register() {
   // state
-  const [name, setName] = useState("Cyber 2");
-  const [email, setEmail] = useState("cyber.hongky@gmail.com");
-  const [password, setPassword] = useState("12345678");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   // hooks
   const [auth, setAuth] = useAuth();
@@ -41,9 +42,11 @@ export default function Register() {
 
 
   return (
-    <div>
+      <div style={{transform: "translateY(50px)"}}>
       <Jumbotron title="Đăng ký" />
-      <div className="container mt-5">
+
+      <div className="container mt-5"
+      style={{marginBottom:"20px"}}>
         <div className="row">
           <div className="col-md-6 offset-md-3">
             <form onSubmit={handleSubmit}>
@@ -79,8 +82,7 @@ export default function Register() {
           </div>
         </div>
       </div>
-      {/* <pre>{JSON.stringify(name, null, 4)}</pre> */}
-
+      <Footer />
     </div>
   );
 }

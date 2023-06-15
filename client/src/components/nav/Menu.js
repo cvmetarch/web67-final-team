@@ -25,8 +25,11 @@ export default function Menu() {
   };
 
   return (
-    <>
-      <ul className="nav d-flex justify-content-between align-items-center shadow-sm mb-2">
+    <div>
+      <ul className=
+      "nav d-flex w-100 position-fixed bg-light justify-content-between align-items-center"
+      style={{zIndex:"1"}}
+      >
         <li className="nav-item">
           <NavLink className="nav-link" aria-current="page" to="/">
             <img
@@ -37,18 +40,57 @@ export default function Menu() {
             />
           </NavLink>
         </li>
+
+        <div className="dropdown">
+          <li>
+            <NavLink
+              className="nav-link pointer dropdown-toggle"
+              to="/articles"
+            >
+              CẨM NANG KIẾN THỨC
+            </NavLink>
+
+            <ul
+              className="dropdown-menu"
+              style={{ overflow: "auto" }}
+            >
+              <li>
+                <NavLink className="nav-link" to="/articles/fengshui">
+                  Kiến thức về Phong thủy
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="nav-link" to="/articles/buddhism">
+                  Kiến thức về Phật giáo
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="nav-link" to="/articles/jewel">
+                  Kiến thức về trang sức
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="nav-link" to="/articles/news">
+                  Tin tức
+                </NavLink>
+              </li>
+
+            </ul>
+          </li>
+        </div>
+
         <div className="dropdown">
           <li>
             <a
               className="nav-link pointer dropdown-toggle"
               data-bs-toggle="dropdown"
             >
-              Danh mục
+              DANH MỤC
             </a>
 
             <ul
               className="dropdown-menu"
-              style={{ height: "300px", overflow: "scroll" }}
+              style={{ height: "180px", overflow: "auto" }}
             >
               <li>
                 <NavLink className="nav-link" to="/categories">
@@ -69,7 +111,7 @@ export default function Menu() {
 
         <li className="nav-item d-flex">
           <NavLink className="nav-link" aria-current="page" to="/shop">
-            CyberSilver Mall
+            <b>CYBERSILVER MALL</b>
           </NavLink>
         </li>
 
@@ -137,6 +179,6 @@ export default function Menu() {
           </div>
         )}
       </ul>
-    </>
+    </div>
   );
 }

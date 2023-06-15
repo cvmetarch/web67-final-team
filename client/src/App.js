@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Menu from "./components/nav/Menu";
 import Home from "./pages/Home";
+import Articles from "./pages/Articles";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Dashboard from "./pages/user/Dashboard";
@@ -22,11 +23,21 @@ import CategoryView from "./pages/CategoryView";
 import Cart from "./pages/Cart";
 import AdminOrders from "./pages/admin/Orders";
 
+import Jumbotron from "./components/cards/Jumbotron";
+import Footer from "./components/footer/Footer";
+
 const PageNotFound = () => {
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      Danh mục đang được cập nhật. Vui lòng quay lại sau
+    <div style={{transform: "translateY(50px)"}}>
+    <Jumbotron title="CyberSilver Store - Bạc Thái & Vàng phong thủy" subTitle="Welcome to CyberSilver"/>
+    <div className="row col-md-8 mx-auto">
+        <h5 className="col text-center my-5">Danh mục đang được cập nhật. Vui lòng quay lại sau</h5>
     </div>
+
+
+    <Footer />
+</div>
+
   );
 };
 
@@ -37,6 +48,11 @@ export default function App() {
       <Toaster position="top-right" />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/articles" element={<Articles />} />
+        <Route path="/articles/fengshui" element={<Articles keyroute={'fengshui'}/>} />
+        <Route path="/articles/buddhism" element={<Articles keyroute={'buddhism'}/>} />
+        {/* <Route path="/articles/jewel" element={<Articles keyroute={'jewel'}/>} />
+        <Route path="/articles/news" element={<Articles keyroute={'news'}/>} /> */}
         <Route path="/shop" element={<Shop />} />
         <Route path="/categories" element={<CategoriesList />} />
         <Route path="/category/:slug" element={<CategoryView />} />

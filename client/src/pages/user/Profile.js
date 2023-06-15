@@ -49,7 +49,7 @@ export default function UserProfile() {
   };
 
   return (
-    <>
+    <div style={{transform: "translateY(50px)"}}>
       <Jumbotron title={`Xin chào ${auth?.user?.name}`} subTitle="Trang cá nhân" />
 
       <div className="container-fluid">
@@ -99,6 +99,6 @@ export default function UserProfile() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

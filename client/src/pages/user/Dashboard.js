@@ -7,7 +7,7 @@ export default function Dashboard() {
   const [auth, setAuth] = useAuth();
 
   return (
-    <>
+    <div style={{transform: "translateY(50px)"}}>
       <Jumbotron title={`Xin chào ${auth?.user?.name}`} subTitle="Trang cá nhân" />
 
       <div className="container-fluid">
@@ -25,6 +25,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
