@@ -117,7 +117,7 @@ export default function AdminProductUpdate() {
               <div className="text-center">
                 <img
                   src={URL.createObjectURL(photo)}
-                  alt="product photo"
+                  alt="product"
                   className="img img-responsive"
                   height="200px"
                 />
@@ -128,7 +128,7 @@ export default function AdminProductUpdate() {
                   src={`${
                     process.env.REACT_APP_API
                   }/product/photo/${id}?${new Date().getTime()}`}
-                  alt="product photo"
+                  alt="product"
                   className="img img-responsive"
                   height="200px"
                 />

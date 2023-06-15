@@ -75,13 +75,13 @@ export default function AdminProduct() {
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <div className="p-3 mt-2 mb-2 h4 bg-light">Thêm sản phẩm</div>
+            <div className="p-3 mt-2 mb-2 h4 bg-light">Thêm sản phẩm mới</div>
 
             {photo && (
               <div className="text-center">
                 <img
                   src={URL.createObjectURL(photo)}
-                  alt="product photo"
+                  alt="product"
                   className="img img-responsive"
                   height="200px"
                 />

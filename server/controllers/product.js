@@ -4,10 +4,9 @@ import slugify from "slugify";
 import braintree from "braintree";
 import dotenv from "dotenv";
 import Order from "../models/order.js";
-// import sgMail from "@sendgrid/mail";
+import SibApiV3Sdk from "sib-api-v3-sdk";
 
 dotenv.config();
-// sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 const gateway = new braintree.BraintreeGateway({
   environment: braintree.Environment.Sandbox,
@@ -328,27 +327,35 @@ export const orderStatus = async (req, res) => {
       { status },
       { new: true }
     ).populate("buyer", "email name");
+
     // send email
-
-    // prepare email
-    const emailData = {
-      from: process.env.EMAIL_FROM,
-      to: order.buyer.email,
-      subject: "Order status",
-      html: `
-        <h1>Hi ${order.buyer.name}, Your order's status is: <span style="color:red;">${order.status}</span></h1>
-        <p>Visit <a href="${process.env.CLIENT_URL}/dashboard/user/orders">your dashboard</a> for more details</p>
-      `,
-    };
-
-    try {
-      await sgMail.send(emailData);
-    } catch (err) {
-      console.log(err);
-    }
-
+    SibApiV3Sdk.ApiClient.instance.authentications['api-key'].apiKey = process.env.BREVO_KEY;
+    new SibApiV3Sdk.TransactionalEmailsApi().sendTransacEmail({
+        'subject':'Trạng thái đơn hàng',
+        'sender' : {'email': process.env.EMAIL_FROM, 'name':'CyberSilver'},
+        'replyTo' : {'email':'api@sendinblue.com', 'name':'Sendinblue'},
+        'to' : [{'name': order.buyer.name, 'email': order.buyer.email}],
+        'htmlContent' :
+        `
+        <html>
+          <body>
+            <p>Xin chào <b>${order.buyer.name}</b></p>
+            <h2>Trạng thái đơn hàng của bạn là: <span style="color:red;">${order.status}</span></h2>
+            <p>Truy cập <a href="${process.env.CLIENT_URL}/dashboard/user/orders">trang cá nhân</a> để xem thông tin chi tiết!</p>
+            <hr>
+            <p>{{params.bodyMessage}}</p>
+          </body>
+        </html>`,
+        'params' : {'bodyMessage':'Trân trọng!'
+      }}
+    ).then(function(data) {
+      console.log(data);
+    }, function(error) {
+      console.error(error);
+    });
     res.json(order);
   } catch (err) {
     console.log(err);
   }
 };
+

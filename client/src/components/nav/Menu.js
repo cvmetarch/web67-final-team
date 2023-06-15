@@ -5,7 +5,7 @@ import Search from "../forms/Search";
 import useCategory from "../../hooks/useCategory";
 import { useCart } from "../../context/cart";
 import { Badge } from "antd";
-import { FaShoppingBag, FaShoppingBasket, FaShoppingCart } from "react-icons/fa";
+import { FaShoppingBag } from "react-icons/fa";
 import storeLogo from "../../images/logo.png";
 
 export default function Menu() {
@@ -31,6 +31,7 @@ export default function Menu() {
           <NavLink className="nav-link" aria-current="page" to="/">
             <img
               src={storeLogo}
+              alt="card-top"
               className="card-img-top"
               style={{ width: "150px", objectFit: "cover" }}
             />

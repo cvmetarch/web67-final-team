@@ -13,14 +13,20 @@ export default function AdminMenu() {
         </li>
 
         <li>
+          <NavLink className="list-group-item" to="/dashboard/admin/product" style={{marginLeft:"12px"}}>
+            Thêm sản phẩm mới
+          </NavLink>
+        </li>
+
+        <li>
           <NavLink className="list-group-item" to="/dashboard/admin/products">
-            Products
+            Danh sách sản phẩm
           </NavLink>
         </li>
 
         <li>
           <NavLink className="list-group-item" to="/dashboard/admin/orders">
-            Manage orders
+            Quản lý đơn hàng
           </NavLink>
         </li>
       </ul>

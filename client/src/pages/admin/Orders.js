@@ -15,11 +15,11 @@ export default function AdminOrders() {
   // state
   const [orders, setOrders] = useState([]);
   const [status, setStatus] = useState([
-    "Not processed",
-    "Processing",
-    "Shipped",
-    "Delivered",
-    "Cancelled",
+    "Đã xác nhận",
+    "Đang đóng gói",
+    "Đang giao hàng",
+    "Đã nhận hàng",
+    "Đã hủy",
   ]);
   const [changedStatus, setChangedStatus] = useState("");
 
@@ -50,7 +50,7 @@ export default function AdminOrders() {
 
   return (
     <>
-      <Jumbotron title={`Hello ${auth?.user?.name}`} subTitle="Dashboard" />
+      <Jumbotron title={`Xin chào ${auth?.user?.name}`} subTitle="Trang quản trị" />
 
       <div className="container-fluid">
         <div className="row">
@@ -58,7 +58,7 @@ export default function AdminOrders() {
             <AdminMenu />
           </div>
           <div className="col-md-9">
-            <div className="p-3 mt-2 mb-2 h4 bg-light">Orders</div>
+            <div className="p-3 mt-2 mb-2 h4 bg-light">Quản lý đơn hàng</div>
 
             {orders?.map((o, i) => {
               return (
@@ -70,11 +70,11 @@ export default function AdminOrders() {
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Buyer</th>
-                        <th scope="col">Ordered</th>
-                        <th scope="col">Payment</th>
-                        <th scope="col">Quantity</th>
+                        <th scope="col">Trạng thái đơn hàng</th>
+                        <th scope="col">Người đặt</th>
+                        <th scope="col">Đặt thành công</th>
+                        <th scope="col">Thanh toán</th>
+                        <th scope="col">Số lượng</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -95,8 +95,8 @@ export default function AdminOrders() {
                         </td>
                         <td>{o?.buyer?.name}</td>
                         <td>{moment(o?.createdAt).fromNow()}</td>
-                        <td>{o?.payment?.success ? "Success" : "Failed"}</td>
-                        <td>{o?.products?.length} products</td>
+                        <td>{o?.payment?.success ? "Thành công" : "Chưa thành công"}</td>
+                        <td>{o?.products?.length}</td>
                       </tr>
                     </tbody>
                   </table>
