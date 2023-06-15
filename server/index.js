@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.js";
 import categoryRoutes from "./routes/category.js";
 import productRoutes from "./routes/product.js";
 import cors from "cors";
+import bodyParser from 'body-parser';
 
 dotenv.config();
 
@@ -21,7 +22,10 @@ mongoose
 // middlewares
 app.use(cors());
 app.use(morgan("dev"));
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
+app.use(bodyParser({limit: '50mb'}));
 
 // router middleware
 app.use("/api", authRoutes);

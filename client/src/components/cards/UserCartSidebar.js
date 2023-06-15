@@ -37,7 +37,7 @@ export default function UserCartSidebar() {
     cart.map((item) => {
       total += item.price;
     });
-    return total.toLocaleString("vi-VN", {
+    return (1000*total).toLocaleString("vi-VN", {
       style: "currency",
       currency: "VND",
     });

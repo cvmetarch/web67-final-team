@@ -84,7 +84,7 @@ export default function ProductView() {
               <div>
                 <p>
                   <FaMoneyBill /> {" "}
-                  {product?.price?.toLocaleString("vi-VN", {
+                  {((product?.price)*1000)?.toLocaleString("vi-VN", {
                     style: "currency",
                     currency: "VND",
                   })}

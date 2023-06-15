@@ -34,7 +34,7 @@ return (
       <div className="card-body">
         <h5>{p?.name}</h5>
         <h4 className="fw-bold">
-          {p?.price?.toLocaleString("vi-VN", {
+          {((p?.price)*1000)?.toLocaleString("vi-VN", {
             style: "currency",
             currency: "VND",
           })}

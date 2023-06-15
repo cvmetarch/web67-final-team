@@ -37,7 +37,7 @@ export default function ProductCardHorizontal({ p, remove = true }) {
         <div className="card-body">
           <h5 className="card-title">
             {p.name}{" "}
-            {p?.price?.toLocaleString("vi-VN", {
+            {((p?.price)*1000)?.toLocaleString("vi-VN", {
               style: "currency",
               currency: "VND",
             })}
