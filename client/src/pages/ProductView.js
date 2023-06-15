@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import moment from "moment";
 import axios from "axios";
+import Jumbotron from "../components/cards/Jumbotron";
 import { useParams } from "react-router-dom";
 import { Badge } from "antd";
 import {
@@ -16,6 +17,7 @@ import ProductCard from "../components/cards/ProductCard";
 import toast from "react-hot-toast";
 import { useCart } from "../context/cart";
 import viLocale from "moment/locale/vi";
+import Footer from "../components/footer/Footer";
 
 export default function ProductView() {
   // context
@@ -52,10 +54,11 @@ export default function ProductView() {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-9">
-          <div className="card mb-3 hoverable">
+    <div style={{transform: "translateY(50px)"}}>
+      <Jumbotron title="CyberSilver Store - Bạc Thái & Vàng phong thủy" subTitle="Chi tiết sản phẩm"/>
+      <div className="container-fluid">
+        <div className="row col-md-8 mx-auto mt-3">
+          <div className="card col-md-9 mb-3 hoverable">
             <Badge.Ribbon text={`Đã bán ${product?.sold}`} color="red">
               <Badge.Ribbon
                 text={`${
@@ -127,17 +130,17 @@ export default function ProductView() {
               Thêm vào giỏ hàng
             </button>
           </div>
-        </div>
-
-        <div className="col-md-3">
-          <h2>Sản phẩm liên quan</h2>
-          <hr />
-          {related?.length < 1 && <p>Chưa tìm thấy</p>}
-          {related?.map((p) => (
-            <ProductCard p={p} key={p._id} />
-          ))}
+          <div className="col-md-3">
+            <h2>Sản phẩm liên quan</h2>
+            <hr />
+            {related?.length < 1 && <p>Chưa tìm thấy</p>}
+            {related?.map((p) => (
+              <ProductCard p={p} key={p._id} />
+            ))}
+          </div>
         </div>
       </div>
+    <Footer />
     </div>
   );
 }
