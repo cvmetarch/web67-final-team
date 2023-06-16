@@ -11,7 +11,7 @@ export default function Dashboard() {
       <Jumbotron title={`Xin chào ${auth?.user?.name}`} subTitle="Trang cá nhân" />
 
       <div className="container-fluid">
-        <div className="row">
+        <div className="row col-md-8 mx-auto">
           <div className="col-md-3">
             <UserMenu />
           </div>
